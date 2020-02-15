@@ -1,0 +1,10 @@
+@import "bootstrap";
+
+.input {
+    display: grid;
+    grid-template-columns: 10ch 16ch;
+}
+
+#app {
+    padding: 1ch;
+}
