@@ -1,5 +1,6 @@
 import * as React from "react"
 import { expected_value_of_damage_table } from "model/expected_value"
+import { success_rate } from "model/counter_role"
 import { Form, Button } from "react-bootstrap"
 
 type Props = {}
@@ -52,8 +53,27 @@ export class App extends React.Component<Props, State> {
         }
     }
 
+    onInputAccuracy(maybe_accuracy: string) {
+        const accuracy = Number(maybe_accuracy);
+        if (!isNaN(accuracy)) {
+            this.setState({
+                accuracy
+            });
+        }
+    }
+
+    onInputEvasion(maybe_evasion: string) {
+        const evasion = Number(maybe_evasion);
+        if (!isNaN(evasion)) {
+            this.setState({
+                evasion
+            });
+        }
+    }
+
     render(): JSX.Element | null {
         const expected_damage = expected_value_of_damage_table(this.state.damage, this.state.std_value, this.state.critical_number);
+        const acc_rate = success_rate(this.state.accuracy, this.state.evasion);
         return (
             <div id="app">
                 <div>
@@ -71,22 +91,26 @@ export class App extends React.Component<Props, State> {
                     </div>
                 </div>
                 <div className="input">
-                    <span>与ダメージの期待値</span>
+                    <span>命中時与ダメージの期待値</span>
                     <span>{expected_damage.toFixed(2)}</span>
                 </div>
                 <div>
                     <div className="input">
                         <span>命中力</span>
-                        <Form.Control type="text" value={this.state.accuracy.toString()} />
+                        <Form.Control type="text" value={this.state.accuracy.toString()} onInput={(e: React.FormEvent<HTMLInputElement>) => this.onInputAccuracy(e.currentTarget.value)} />
                     </div>
                     <div className="input">
                         <span>回避力</span>
-                        <Form.Control type="text" value={this.state.evasion.toString()} />
+                        <Form.Control type="text" value={this.state.evasion.toString()} onInput={(e: React.FormEvent<HTMLInputElement>) => this.onInputEvasion(e.currentTarget.value)} />
                     </div>
                 </div>
                 <div className="input">
+                    <span>命中率</span>
+                    <span>{(acc_rate * 100).toFixed(2)}%</span>
+                </div>
+                <div className="input">
                     <span>DPSの期待値</span>
-                    <span>{expected_damage.toFixed(2)}</span>
+                    <span>{(acc_rate * expected_damage).toFixed(2)}</span>
                 </div>
             </div>
         );
