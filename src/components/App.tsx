@@ -76,42 +76,26 @@ export class App extends React.Component<Props, State> {
         const acc_rate = success_rate(this.state.accuracy, this.state.evasion);
         return (
             <div id="app">
-                <div>
-                    <div className="input">
-                        <span>基準値</span>
-                        <Form.Control type="text" value={this.state.std_value.toString()} onInput={(e: React.FormEvent<HTMLInputElement>) => this.onInputStdValue(e.currentTarget.value)} />
-                    </div>
-                    <div className="input">
-                        <span>威力</span>
-                        <Form.Control type="text" value={this.state.damage.toString()} onInput={(e: React.FormEvent<HTMLInputElement>) => this.onInputDamage(e.currentTarget.value)} />
-                    </div>
-                    <div className="input">
-                        <span>C値</span>
-                        <Form.Control type="text" value={this.state.critical_number.toString()} onInput={(e: React.FormEvent<HTMLInputElement>) => this.onInputCriticalNumber(e.currentTarget.value)} />
-                    </div>
-                </div>
-                <div className="input">
-                    <span>命中時与ダメージの期待値</span>
-                    <span>{expected_damage.toFixed(2)}</span>
-                </div>
-                <div>
-                    <div className="input">
-                        <span>命中力</span>
-                        <Form.Control type="text" value={this.state.accuracy.toString()} onInput={(e: React.FormEvent<HTMLInputElement>) => this.onInputAccuracy(e.currentTarget.value)} />
-                    </div>
-                    <div className="input">
-                        <span>回避力</span>
-                        <Form.Control type="text" value={this.state.evasion.toString()} onInput={(e: React.FormEvent<HTMLInputElement>) => this.onInputEvasion(e.currentTarget.value)} />
-                    </div>
-                </div>
-                <div className="input">
-                    <span>命中率</span>
-                    <span>{(acc_rate * 100).toFixed(2)}%</span>
-                </div>
-                <div className="input">
-                    <span>DPSの期待値</span>
-                    <span>{(acc_rate * expected_damage).toFixed(2)}</span>
-                </div>
+                <span>基準値</span>
+                <Form.Control type="text" value={this.state.std_value.toString()} onInput={(e: React.FormEvent<HTMLInputElement>) => this.onInputStdValue(e.currentTarget.value)} />
+                <span>威力</span>
+                <Form.Control type="text" value={this.state.damage.toString()} onInput={(e: React.FormEvent<HTMLInputElement>) => this.onInputDamage(e.currentTarget.value)} />
+                <span>C値</span>
+                <Form.Control type="text" value={this.state.critical_number.toString()} onInput={(e: React.FormEvent<HTMLInputElement>) => this.onInputCriticalNumber(e.currentTarget.value)} />
+
+                <span>命中時与ダメージの期待値</span>
+                <span>{expected_damage.toFixed(2)}</span>
+
+                <span>命中力</span>
+                <Form.Control type="text" value={this.state.accuracy.toString()} onInput={(e: React.FormEvent<HTMLInputElement>) => this.onInputAccuracy(e.currentTarget.value)} />
+                <span>回避力</span>
+                <Form.Control type="text" value={this.state.evasion.toString()} onInput={(e: React.FormEvent<HTMLInputElement>) => this.onInputEvasion(e.currentTarget.value)} />
+
+                <span>命中率</span>
+                <span>{(acc_rate * 100).toFixed(2)}%</span>
+
+                <span>DPSの期待値</span>
+                <span>{(acc_rate * expected_damage).toFixed(2)}</span>
             </div>
         );
     }

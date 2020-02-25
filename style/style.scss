@@ -1,10 +1,11 @@
 @import "bootstrap";
 
-.input {
-    display: grid;
-    grid-template-columns: 10ch 16ch;
-}
-
 #app {
     padding: 1ch;
+    display: grid;
+    grid-template-columns: max-content 16ch;
+    column-gap: 1ch;
+    row-gap: 0.5ch;
+    justify-items: right;
+    align-items: center;
 }
